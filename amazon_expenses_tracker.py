@@ -9,7 +9,6 @@ def validate_password():
     pattern = "^(?=.*?\d)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,20}$"
     
     while True:
-        password = input("Create a safe password: ")
         
         if re.match(pattern, password):
             print("Password successfully created!")
@@ -19,6 +18,7 @@ def validate_password():
     
 
 user_name = input("Create a name: ")
+password = input("Create a safe password: ")
 validate_password()
 
 # Ask the user to iput his valid german mobile number.
@@ -36,3 +36,20 @@ def phone_number():
             print("Invalid phone number. Try again (e.g., +4917612345678 or 017612345678): ")
             
 phone_number()
+
+# Ask the user to login
+def login():
+    attempts = 3
+    
+    for attempt in range(attempts):
+        log = input("Enter your username: ")
+        pass_word = input("Enter your password: ")
+
+        if (log == user_name and pass_word == password):
+            print("Login successful!")
+            return
+        else:
+            print("Invalid Username or password. Try again: ")
+    print("You've used all the attempts. Try again after 5 seconds...")
+     
+login()
