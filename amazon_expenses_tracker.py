@@ -19,8 +19,8 @@ def validate_password():
     
 
 def registration():
-    global user_name, password
-    user_name = input("Create a name: ")
+    #global user_name, password
+    user_name = input("Create a name: ").strip()
     password = validate_password()
     print("Registration successful!")
     return user_name, password
@@ -81,6 +81,7 @@ print(f"Hello {user_name}! Welcome to the Amazon Expense Tracker!")
 
 def options():
     purchases = []
+    spending_limit = 500
     
     # General input func with validation.
     def get_input(prompt, validator):
@@ -117,9 +118,9 @@ def options():
     
     while True:
         print("What would you like to do?")
-        print("1.Enter a pirchase.")
-        print("2.Generate a report.")
-        print("3.Quit.")
+        print("1. Enter a purchase.")
+        print("2. Generate a report.")
+        print("3. Quit.")
         
         choice = input("Select an option (1-3) ")
         
@@ -138,9 +139,27 @@ def options():
             if not purchases:
                 print("You must enter at least one purchase first.")
             else:
+                total_items_cost = sum(p["total_cost"] for p in purchases)
+                total_weight = sum(p["weight_kg"] * p["quantity"] for p in purchases)
+                total_delivery_charge = total_weight * 1
+                most_expensive = max(purchases, key=lambda p: p["total_cost"])
+                least_expensive = min(purchases, key=lambda p: p["total_cost"])
+                avg_cost = total_items_cost / len(purchases) if purchases else 0
+                
                 print("\nPurchase Report:")
-                for i, p in enumerate(purchases, 1):
-                    print(f"{i}. Date: {p["date"]}, Item: {p["item"]}, Cost: ${p["total_cost"]}, Weight: {p["weight_kg"]}kg, Quantity: {p["quantity"]}") 
+                print(f"Total cost items (excluding delivery): €{total_items_cost:.2f}")
+                print(f"Total delivery charges: €{total_delivery_charge:.2f}")
+                print(f"Most expensive order: {most_expensive['item']} (€{most_expensive['total_cost']:.2f})")
+                print(f"Least expensive order: {least_expensive['item']} (€{least_expensive['total_cost']:.2f})")
+                print(f"Average cost per order: €{avg_cost:.2f}")
+                
+                total_spent = total_items_cost + total_delivery_charge
+                if total_spent > spending_limit:
+                    print(f"Warning: You've exceeded the spending limit of €{spending_limit:.2f}!")
+                else:
+                    print(f"Note: You have not exceeded the spending limit of €{spending_limit:.2f}.")
+                    
+                
                 
         elif choice == "3":
             print(f"Goodbye {user_name}!")
