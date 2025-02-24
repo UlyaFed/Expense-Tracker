@@ -83,10 +83,10 @@ def options():
     purchases = []
     
     # General input func with validation.
-    def get_input(promt, validator):
+    def get_input(prompt, validator):
         
         while True:
-            value = input(promt).strip()
+            value = input(prompt).strip()
             if validator(value):
                 return value
             print("invalid input. Please try again.")
@@ -103,7 +103,7 @@ def options():
     def is_valid_float(number):
         
         try:
-            return int(number) >= 1
+            return float(number) >= 1
         except ValueError:
             return False
         
@@ -125,7 +125,7 @@ def options():
         
         if choice == "1":
             purchase = {
-                "date": get_input("Enter date(MM/DD/YYYY): ", is_valid_date.replace("-","/")),
+                "date": get_input("Enter date(MM/DD/YYYY): ", is_valid_date).replace("-","/"),
                 "item": get_input("Enter item name: ", is_valid_string),
                 "total_cost": float(get_input("Enter total cost: ", is_valid_float)),
                 "weight_kg": float(get_input("Enter item weight(kg): ", is_valid_float)),
@@ -135,10 +135,17 @@ def options():
             print("Purchase added successfully!")
             
         elif choice == "2":
-            pass
+            if not purchases:
+                print("You must enter at least one purchase first.")
+            else:
+                print("\nPurchase Report:")
+                for i, p in enumerate(purchases, 1):
+                    print(f"{i}. Date: {p["date"]}, Item: {p["item"]}, Cost: ${p["total_cost"]}, Weight: {p["weight_kg"]}kg, Quantity: {p["quantity"]}") 
+                
         elif choice == "3":
             print(f"Goodbye {user_name}!")
             break
         else:
             print("invalid choice. Please select a valid option.")
             
+options()
