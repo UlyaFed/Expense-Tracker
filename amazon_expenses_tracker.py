@@ -82,6 +82,39 @@ print(f"Hello {user_name}! Welcome to the Amazon Expense Tracker!")
 def options():
     purchases = []
     
+    # General input func with validation.
+    def get_input(promt, validator):
+        
+        while True:
+            value = input(promt).strip()
+            if validator(value):
+                return value
+            print("invalid input. Please try again.")
+    
+    # Check if date format is MM/DD/YYYY or MM-DD-YYYY.
+    def is_valid_date(date):
+        return bool(re.match(r"^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](\d{4})$",date))
+        
+    # Check if text is at least 3 characters long.
+    def is_valid_string(text):
+        return len(text) >= 3
+    
+    # Check if input is a positive float.
+    def is_valid_float(number):
+        
+        try:
+            return int(number) >= 1
+        except ValueError:
+            return False
+        
+    #Check if input is a positive integer.
+    def is_valid_int(number):
+        
+        try:
+            return int(number) >= 1
+        except ValueError:
+            return False
+    
     while True:
         print("What would you like to do?")
         print("1.Enter a pirchase.")
@@ -91,7 +124,16 @@ def options():
         choice = input("Select an option (1-3) ")
         
         if choice == "1":
-            pass
+            purchase = {
+                "date": get_input("Enter date(MM/DD/YYYY): ", is_valid_date.replace("-","/")),
+                "item": get_input("Enter item name: ", is_valid_string),
+                "total_cost": float(get_input("Enter total cost: ", is_valid_float)),
+                "weight_kg": float(get_input("Enter item weight(kg): ", is_valid_float)),
+                "quantity": int(get_input("Enter quantity: ",is_valid_int))
+            }
+            purchases.append(purchase)
+            print("Purchase added successfully!")
+            
         elif choice == "2":
             pass
         elif choice == "3":
