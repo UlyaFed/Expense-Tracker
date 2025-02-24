@@ -77,3 +77,26 @@ if not login(user_name, password):
     
 
 print(f"Hello {user_name}! Welcome to the Amazon Expense Tracker!")
+
+
+def options():
+    purchases = []
+    
+    while True:
+        print("What would you like to do?")
+        print("1.Enter a pirchase.")
+        print("2.Generate a report.")
+        print("3.Quit.")
+        
+        choice = input("Select an option (1-3) ")
+        
+        if choice == "1":
+            pass
+        elif choice == "2":
+            pass
+        elif choice == "3":
+            print(f"Goodbye {user_name}!")
+            break
+        else:
+            print("invalid choice. Please select a valid option.")
+            
