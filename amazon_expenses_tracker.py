@@ -146,12 +146,27 @@ def options():
                 least_expensive = min(purchases, key=lambda p: p["total_cost"])
                 avg_cost = total_items_cost / len(purchases) if purchases else 0
                 
-                print("\nPurchase Report:")
-                print(f"Total cost items (excluding delivery): €{total_items_cost:.2f}")
-                print(f"Total delivery charges: €{total_delivery_charge:.2f}")
-                print(f"Most expensive order: {most_expensive['item']} (€{most_expensive['total_cost']:.2f})")
-                print(f"Least expensive order: {least_expensive['item']} (€{least_expensive['total_cost']:.2f})")
-                print(f"Average cost per order: €{avg_cost:.2f}")
+                print("\n" + "-" * 40)
+                print("| Amazon Expense Report |".center(40))
+                print("-" * 40 + "\n")
+                print(f"name: {user_name:<10} password: ***  Tel: ***-**{phone[-2:]}")
+                print("-" * 40)
+
+                print(f"{'DELIVERY CHARGES':<20} {'TOTAL ITEM COST':<20}")
+                print(f"{total_delivery_charge:.2f} EURO".ljust(20) + f"{total_items_cost:.2f} EURO".ljust(20))
+                print("\n")
+
+                print(f"{'MOST EXPENSIVE':<20} {'LEAST EXPENSIVE':<20}")
+                print(f"{'Name:':<8} {most_expensive['item']:<12} {'Name:':<8} {least_expensive['item']:<12}")
+                print(f"{'Cost:':<8} {most_expensive['total_cost']:.2f} EURO  {'Cost:':<8} {least_expensive['total_cost']:.2f} EURO")
+                print("\n")
+
+                print(f"AVERAGE COST OF ITEM PER ORDER: {avg_cost:.2f} EURO")
+                if len(purchases) == 1:
+                    print(f"PURCHASE DATE: {purchases[0]['date']}")
+                else:
+                    print(f"PURCHASE DATE RANGE: {purchases[0]['date']} to {purchases[-1]['date']}")
+                print("--------\n")
                 
                 total_spent = total_items_cost + total_delivery_charge
                 if total_spent > spending_limit:
@@ -168,3 +183,13 @@ def options():
             print("invalid choice. Please select a valid option.")
             
 options()
+
+
+
+                #print("\nPurchase Report:")
+                #print(f"Total cost items (excluding delivery): €{total_items_cost:.2f}")
+                #print(f"Total delivery charges: €{total_delivery_charge:.2f}")
+                #print(f"Most expensive order: {most_expensive['item']} (€{most_expensive['total_cost']:.2f})")
+                #print(f"Least expensive order: {least_expensive['item']} (€{least_expensive['total_cost']:.2f})")
+                #print(f"Average cost per order: €{avg_cost:.2f}")
+                #
