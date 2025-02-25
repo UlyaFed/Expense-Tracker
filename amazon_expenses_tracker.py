@@ -146,6 +146,8 @@ def options():
                 least_expensive = min(purchases, key=lambda p: p["total_cost"])
                 avg_cost = total_items_cost / len(purchases) if purchases else 0
                 
+                time.sleep(3)
+                
                 print("\n" + "-" * 40)
                 print("| Amazon Expense Report |".center(40))
                 print("-" * 40 + "\n")
@@ -178,6 +180,7 @@ def options():
                 
         elif choice == "3":
             print(f"Goodbye {user_name}!")
+            time.sleep(1)
             break
         else:
             print("invalid choice. Please select a valid option.")
