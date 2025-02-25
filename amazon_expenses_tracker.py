@@ -186,10 +186,4 @@ options()
 
 
 
-                #print("\nPurchase Report:")
-                #print(f"Total cost items (excluding delivery): €{total_items_cost:.2f}")
-                #print(f"Total delivery charges: €{total_delivery_charge:.2f}")
-                #print(f"Most expensive order: {most_expensive['item']} (€{most_expensive['total_cost']:.2f})")
-                #print(f"Least expensive order: {least_expensive['item']} (€{least_expensive['total_cost']:.2f})")
-                #print(f"Average cost per order: €{avg_cost:.2f}")
-                #
+                
